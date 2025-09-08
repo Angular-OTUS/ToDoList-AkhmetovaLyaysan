@@ -2,24 +2,15 @@
   <h1>Todo List</h1>
 
   <ul class="list">
-    <li class="list__item">
-      <span>Buy a new gaming laptop</span>
-      <button>Delete</button>
-    </li>
-
-    <li class="list__item">
-      <span>Complete prevoius task</span>
-      <button>Delete</button>
-    </li>
-
-    <li class="list__item">
-      <span>Create some angular app</span>
-      <button>Delete</button>
-    </li>
+    @for (item of toDoList; track item.id;let i = $index) {
+      <li class="list__item">
+        <app-to-do-list-item [item]="item" (delete)="deleteTask(i)"></app-to-do-list-item>
+      </li>
+    }
   </ul>
 
   <div class="new-task">
-    <input type="text" placeholder="Add your new todo">
-    <button>Add task</button>
+    <input type="text" placeholder="Add your new todo" [(ngModel)]="value">
+    <button class="button add" (click)="addTask()" [disabled]="!value">Add task</button>
   </div>
 </div>
