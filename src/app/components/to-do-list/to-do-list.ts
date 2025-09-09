@@ -1,6 +1,7 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnInit} from '@angular/core';
+import {FormsModule} from '@angular/forms';
 import {ToDoListItem} from '../to-do-list-item/to-do-list-item';
+import {Button} from '@components/button/button';
 
 export interface ToDo {
   id: number;
@@ -9,27 +10,37 @@ export interface ToDo {
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [FormsModule, ToDoListItem],
+  imports: [FormsModule, ToDoListItem, Button],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.sass',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ToDoList {
+export class ToDoList implements OnInit {
   toDoList: ToDo[] = [
     {
       id: 1,
-      text: 'Buy a new gaming laptop'
+      text: 'Buy a new gaming laptop',
     },
     {
       id: 2,
-      text: 'Complete previous task'
+      text: 'Complete previous task',
     },
     {
       id: 3,
-      text: 'Create some angular app'
-    }
+      text: 'Create some angular app',
+    },
   ];
   value = '';
+
+  isLoading = true;
+  cdr = inject(ChangeDetectorRef);
+
+  ngOnInit() {
+    setTimeout(() => {
+      this.isLoading = false;
+      this.cdr.markForCheck();
+    }, 500);
+  }
 
   deleteTask(i: number) {
     this.toDoList.splice(i, 1);
@@ -39,6 +50,6 @@ export class ToDoList {
     const index = Math.max(...this.toDoList.map((item: ToDo) => item.id));
     this.toDoList.push({id: index + 1, text: this.value});
 
-    this.value = '';    
+    this.value = '';
   }
 }

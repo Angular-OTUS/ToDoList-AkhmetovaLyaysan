@@ -1,16 +1,18 @@
 <div class="wrapper">
   <h1>Todo List</h1>
 
-  <ul class="list">
-    @for (item of toDoList; track item.id;let i = $index) {
-      <li class="list__item">
+  @if (isLoading) {
+    <span>Загрузка</span>
+  } @else {
+    <ul class="list">
+      @for (item of toDoList; track item.id; let i = $index) {
         <app-to-do-list-item [item]="item" (delete)="deleteTask(i)"></app-to-do-list-item>
-      </li>
-    }
-  </ul>
+      }
+    </ul>
+  }
 
   <div class="new-task">
     <input type="text" placeholder="Add your new todo" [(ngModel)]="value">
-    <button class="button add" (click)="addTask()" [disabled]="!value">Add task</button>
+    <app-button title="Add task" (clicked)="addTask()" [disabled]="!value"></app-button>
   </div>
 </div>
