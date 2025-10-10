@@ -11,6 +11,7 @@ import {Button} from '@components/button/button';
 })
 export class ToDoListItem {
   item = input.required<ToDo>();
+  isSelected = input<boolean>(false);
   delete = output();
 
   deleteTask() {
