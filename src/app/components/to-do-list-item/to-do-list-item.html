@@ -1,4 +1,4 @@
 <li [class.selected]="isSelected()">
   <span>{{ item().text }}</span>
-  <app-button title="Delete" (click)="deleteTask()"></app-button>
+  <app-button title="Delete" (click)="deleteTask()" appTooltip="Delete"></app-button>
 </li>

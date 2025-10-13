@@ -3,6 +3,7 @@ import {FormsModule} from '@angular/forms';
 import {ToDoListItem} from '../to-do-list-item/to-do-list-item';
 import {Button} from '@components/button/button';
 import {ShowIf} from '@directives/show-if';
+import {TooltipDirective} from '@directives/tooltip';
 
 export interface ToDo {
   id: number;
@@ -12,7 +13,7 @@ export interface ToDo {
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [FormsModule, ToDoListItem, Button, ShowIf],
+  imports: [FormsModule, ToDoListItem, Button, ShowIf, TooltipDirective],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.sass',
   changeDetection: ChangeDetectionStrategy.OnPush,

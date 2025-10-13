@@ -18,7 +18,7 @@
   <div class="new-task">
     <input type="text" placeholder="Add your new todo" [(ngModel)]="value">
     <textarea [(ngModel)]="description" placeholder="Todo description"></textarea>
-    <app-button title="Add task" (clicked)="addTask()" [disabled]="!value"></app-button>
+    <app-button title="Add task" (clicked)="addTask()" [disabled]="!value" appTooltip="Add task"></app-button>
   </div>
 </div>
 
