@@ -6,13 +6,22 @@
   } @else {
     <ul class="list">
       @for (item of toDoList; track item.id; let i = $index) {
-        <app-to-do-list-item [item]="item" (delete)="deleteTask(i)"></app-to-do-list-item>
+        <app-to-do-list-item
+          [isSelected]="selectedItemId === item.id"
+          [item]="item" (delete)="deleteTask(i)"
+          (click)="selectedItemId = item.id"
+        ></app-to-do-list-item>
       }
     </ul>
   }
 
   <div class="new-task">
     <input type="text" placeholder="Add your new todo" [(ngModel)]="value">
-    <app-button title="Add task" (clicked)="addTask()" [disabled]="!value"></app-button>
+    <textarea [(ngModel)]="description" placeholder="Todo description"></textarea>
+    <app-button title="Add task" (clicked)="addTask()" [disabled]="!value" appTooltip="Add task"></app-button>
   </div>
+</div>
+
+<div *appShowIf="selectedItemId != null" class="description">
+  {{ selectedTodoDescription }}
 </div>
